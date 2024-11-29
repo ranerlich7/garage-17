@@ -10,10 +10,15 @@ function App() {
   const [carNumber, setCarNumber] = useState("")
 
   function addCar() {
-    const newCar = { name: carName, number: carNumber }    
-    setCars([...cars, newCar])        // spread operator example 
+    const newCar = { name: carName, number: carNumber }
+    setCars([...cars, newCar]) // spread operator example
     setCarName("")
     setCarNumber("")
+  }
+  // Function to handle car deletion
+  function deleteCar(index) {
+    const updatedCars = cars.filter((car, carIndex) => carIndex !== index)
+    setCars(updatedCars)
   }
   return (
     <>
@@ -24,7 +29,7 @@ function App() {
             <div className="car-button">{car.number}</div>
           </div>
           <div className="card-action">
-            <button>Click</button>
+            <button onClick={() => deleteCar(index)}>Delete</button>
           </div>
         </div>
       ))}

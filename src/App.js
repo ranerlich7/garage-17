@@ -1,5 +1,6 @@
 import { useState } from "react"
 import "./App.css"
+import Car from "./components/Car"
 
 function App() {
   const [cars, setCars] = useState([
@@ -8,6 +9,7 @@ function App() {
   ])
   const [carName, setCarName] = useState("")
   const [carNumber, setCarNumber] = useState("")
+  const [search, setSearch] = useState("")
 
   function addCar() {
     const newCar = { name: carName, number: carNumber }
@@ -20,20 +22,22 @@ function App() {
     const updatedCars = cars.filter((car, carIndex) => carIndex !== index)
     setCars(updatedCars)
   }
+
+  function searchCars(e) {
+    let value = e.target.value
+    const updatedCars = cars.filter((car) => car.name.startsWith(search))
+    setSearch(value)
+    setCars(updatedCars)
+  }
   return (
     <>
+      Search:
+      <input value={search} onChange={searchCars} />
+      <br></br>
       {cars.map((car, index) => (
-        <div className="card" key={index}>
-          <div className="card-title">
-            <h3>{car.name}</h3>
-            <div className="car-button">{car.number}</div>
-          </div>
-          <div className="card-action">
-            <button onClick={() => deleteCar(index)}>Delete</button>
-          </div>
-        </div>
+        <Car key={index} car={car} deleteCar={deleteCar} index={index} />
       ))}
-      <div>
+      <div className="card">
         Name:
         <input value={carName} onChange={(e) => setCarName(e.target.value)} />
         <br></br>

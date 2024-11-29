@@ -1,3 +1,36 @@
+.card {
+  border: 1px solid #ddd;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  margin: 10px;
+  background-color: #fff;
+}
+
+.card-title h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.card-action {
+  margin-top: 10px;
+}
+
+.car-button {
+  background-color: #4caf50; /* Green background */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
 .App {
   text-align: center;
 }

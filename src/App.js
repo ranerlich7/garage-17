@@ -14,15 +14,6 @@ function App() {
     getAllCars().then((allCars) => setCars(allCars))
   }, [])
 
-  //   useEffect(() => {
-  //     getAllCars().then((allCars) => setCars(allCars))
-  //   }, [])
-
-  async function setAllCars() {
-    const allCars = await getAllCars()
-    setCars(allCars)
-  }
-
   async function addCar() {
     const newCar = { name: carName, number: carNumber }
     await addCarApi(newCar)
@@ -50,7 +41,6 @@ function App() {
 
   return (
     <>
-      <button onClick={setAllCars}>GET</button>
       Search:
       <input value={search} onChange={(e) => setSearch(e.target.value)} />
       <br></br>

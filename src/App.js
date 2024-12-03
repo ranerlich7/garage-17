@@ -12,6 +12,7 @@ function App() {
   const [search, setSearch] = useState("")
 
   function addCar() {
+    console.log('homework 2')
     const newCar = { name: carName, number: carNumber }
     setCars([...cars, newCar]) // spread operator example
     setCarName("")
@@ -19,11 +20,13 @@ function App() {
   }
   // Function to handle car deletion
   function deleteCar(index) {
+    console.log('homework 2')
     const updatedCars = cars.filter((car, carIndex) => carIndex !== index)
     setCars(updatedCars)
   }
 
   function updatedCars() {
+    console.log('homework 2')
     return cars.filter((car) => car.name.startsWith(search))
   }
 

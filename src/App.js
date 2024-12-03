@@ -4,10 +4,15 @@ import Car from "./components/Car"
 import { getAllCars } from "./api"
 
 function App() {
-  const [cars, setCars] = useState(getAllCars())
+  const [cars, setCars] = useState([])
   const [carName, setCarName] = useState("")
   const [carNumber, setCarNumber] = useState("")
   const [search, setSearch] = useState("")
+
+  async function setAllCars() {
+    const allCars = await getAllCars()
+    setCars(allCars)
+  }
 
   function addCar() {
     const newCar = { name: carName, number: carNumber }
@@ -21,9 +26,9 @@ function App() {
     setCars(updatedCars)
   }
 
-  function updatedCars() {
-    return cars.filter((car) => car.name.startsWith(search))
-  }
+  //   function updatedCars() {
+  //     return cars.filter((car) => car.name.startsWith(search))
+  //   }
 
   function setPrice(index, newPrice) {
     const updatedCars = cars.map((car, carIndex) =>
@@ -34,10 +39,11 @@ function App() {
 
   return (
     <>
+      <button onClick={setAllCars}>GET</button>
       Search:
       <input value={search} onChange={(e) => setSearch(e.target.value)} />
       <br></br>
-      {updatedCars().map((car, index) => (
+      {cars.map((car, index) => (
         <Car
           key={index}
           car={car}

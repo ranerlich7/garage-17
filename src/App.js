@@ -1,12 +1,10 @@
 import { useState } from "react"
 import "./App.css"
 import Car from "./components/Car"
+import { getAllCars } from "./api"
 
 function App() {
-  const [cars, setCars] = useState([
-    { name: "Honda", number: "12-412-56" },
-    { name: "Tesla", number: "13-246-63" },
-  ])
+  const [cars, setCars] = useState(getAllCars())
   const [carName, setCarName] = useState("")
   const [carNumber, setCarNumber] = useState("")
   const [search, setSearch] = useState("")
@@ -27,13 +25,26 @@ function App() {
     return cars.filter((car) => car.name.startsWith(search))
   }
 
+  function setPrice(index, newPrice) {
+    const updatedCars = cars.map((car, carIndex) =>
+      carIndex === index ? { ...car, price: newPrice } : car
+    )
+    setCars(updatedCars)
+  }
+
   return (
     <>
       Search:
       <input value={search} onChange={(e) => setSearch(e.target.value)} />
       <br></br>
       {updatedCars().map((car, index) => (
-        <Car key={index} car={car} deleteCar={deleteCar} index={index} />
+        <Car
+          key={index}
+          car={car}
+          deleteCar={deleteCar}
+          index={index}
+          setPrice={setPrice}
+        />
       ))}
       <div className="card">
         Name:

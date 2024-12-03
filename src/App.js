@@ -1,7 +1,7 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "./App.css"
 import Car from "./components/Car"
-import { getAllCars } from "./api"
+import { addCarApi, deleteCarApi, getAllCars } from "./api"
 
 function App() {
   const [cars, setCars] = useState([])
@@ -9,20 +9,31 @@ function App() {
   const [carNumber, setCarNumber] = useState("")
   const [search, setSearch] = useState("")
 
+  useEffect(() => {
+    console.log("starting app")
+    getAllCars().then((allCars) => setCars(allCars))
+  }, [])
+
+  //   useEffect(() => {
+  //     getAllCars().then((allCars) => setCars(allCars))
+  //   }, [])
+
   async function setAllCars() {
     const allCars = await getAllCars()
     setCars(allCars)
   }
 
-  function addCar() {
+  async function addCar() {
     const newCar = { name: carName, number: carNumber }
+    await addCarApi(newCar)
     setCars([...cars, newCar]) // spread operator example
     setCarName("")
     setCarNumber("")
   }
   // Function to handle car deletion
-  function deleteCar(index) {
-    const updatedCars = cars.filter((car, carIndex) => carIndex !== index)
+  async function deleteCar(carID) {
+    await deleteCarApi(carID)
+    const updatedCars = cars.filter((car) => car.id !== carID)
     setCars(updatedCars)
   }
 

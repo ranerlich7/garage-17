@@ -13,7 +13,7 @@ function Car({ car, deleteCar, index, setPrice }) {
           <div className="car-button">{car.number}</div>
         </div>
         <div className="card-action">
-          <button onClick={() => deleteCar(index)}>Delete</button>
+          <button onClick={() => deleteCar(car.id)}>Delete</button>
         </div>
       </div>
     </>

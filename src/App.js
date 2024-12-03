@@ -23,18 +23,16 @@ function App() {
     setCars(updatedCars)
   }
 
-  function searchCars(e) {
-    let value = e.target.value
-    const updatedCars = cars.filter((car) => car.name.startsWith(search))
-    setSearch(value)
-    setCars(updatedCars)
+  function updatedCars() {
+    return cars.filter((car) => car.name.startsWith(search))
   }
+
   return (
     <>
       Search:
-      <input value={search} onChange={searchCars} />
+      <input value={search} onChange={(e) => setSearch(e.target.value)} />
       <br></br>
-      {cars.map((car, index) => (
+      {updatedCars().map((car, index) => (
         <Car key={index} car={car} deleteCar={deleteCar} index={index} />
       ))}
       <div className="card">

@@ -24,6 +24,7 @@ function App() {
   }
 
   function updatedCars() {
+    console.log("aaaaaaaaaaa i did this on this branch")
     return cars.filter((car) => car.name.startsWith(search))
   }
 
